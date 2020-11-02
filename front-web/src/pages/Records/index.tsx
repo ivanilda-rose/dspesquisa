@@ -3,11 +3,11 @@ import axios from 'axios';
 import { RecordsResponse } from './types';
 import { formatDate } from './helpers';
 import Pagination from './Pagination';
-import { Link } from 'react-router-dom';
+import Filters from '../../components/Filters';
 
 import './styles.css';
 
-const BASE_URL = 'http://192.168.1.65:8080';
+const BASE_URL = 'http://192.168.1.67:8080';
 
 const Records = () => {
 
@@ -16,8 +16,7 @@ const Records = () => {
 
 	useEffect( () => {
 		axios.get(`${BASE_URL}/records?linesPerPage=12&page=${activePage}`)
-		.then(response => {
-			console.log(response.data);
+		.then(response => {			
 		   setRecordsResponse(response.data)});
 	}, [activePage]);
 	
@@ -27,13 +26,7 @@ const Records = () => {
 	
 	return (
 		<div className="page-container">
-			<div className="filters-container records-actions">
-				<Link to="/charts">				
-					<button className="action-filters">
-					  VER GRÁFICOS
-					</button>
-				</Link>
-			</div>
+			<Filters link="/charts" linkText="VER GRÀFICOS"/>
 			<table className="records-table" cellPadding="0" cellSpacing="0">
 				<thead>
 					<tr>
